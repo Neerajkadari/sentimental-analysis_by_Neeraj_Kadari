@@ -20,7 +20,7 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 # ANALYSIS LOGIC (same as your code)
 # =========================================================
 
-def analyze_transcript(transcript, OPENAI_API_KEY, model_name="gpt-3.5-turbo"):
+def analyze_transcript(transcript, OPENAI_API_KEY, model_name="gpt-3.5-turbo-1106"):
     """
     Analyzes a given transcript using the OpenAI API to get a summary and sentiment.
     """
