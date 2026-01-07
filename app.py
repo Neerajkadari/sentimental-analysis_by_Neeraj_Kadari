@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template_string
-from groq import Groq
 import os
 import csv
 import json
@@ -13,19 +12,16 @@ app = Flask(__name__)
 # =========================================================
 # CONFIG
 # =========================================================
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
-
-os.environ['GROQ_API_KEY'] = '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'
-   
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 # =========================================================
 # ANALYSIS LOGIC (same as your code)
 # =========================================================
 
-def analyze_transcript(transcript, groq_api_key, model_name="llama-3.1-8b-instant"):
+def analyze_transcript(transcript, openai_api_key, model_name="llama-3.1-8b-instant"):
     """
     Analyzes a given transcript using the Groq API to get a summary and sentiment.
     """
-    client = Groq(api_key=groq_api_key)
+    client = OpenAI(api_key=openai_api_key)
 
     system_prompt = (
         "You are an expert at analyzing customer transcripts. "
@@ -971,12 +967,12 @@ def index():
     if request.method == "POST":
         transcript = request.form.get("transcript", "").strip()
 
-        if not GROQ_API_KEY:
-            api_error = "GROQ_API_KEY is not set. Please set it as an environment variable and restart the app."
+        if not openai_api_key:
+            api_error = "openai_api_key is not set. Please set it as an environment variable and restart the app."
         elif not transcript:
             api_error = "Transcript cannot be empty."
         else:
-            summary, sentiment = analyze_transcript(transcript, GROQ_API_KEY)
+            summary, sentiment = analyze_transcript(transcript, openai_api_key)
             analysis_data = {
                 "Transcript": transcript,
                 "Summary": summary,
