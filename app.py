@@ -976,4 +976,4 @@ def index():
 # =========================================================
 if __name__ == "__main__":
     # host="0.0.0.0" lets mobile on same Wi-Fi open it using your PC's IP
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
