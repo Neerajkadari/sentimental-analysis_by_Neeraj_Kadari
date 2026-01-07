@@ -20,11 +20,11 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 # ANALYSIS LOGIC (same as your code)
 # =========================================================
 
-def analyze_transcript(transcript, openai_api_key, model_name="gpt-3.5-turbo"):
+def analyze_transcript(transcript, OPENAI_API_KEY, model_name="gpt-3.5-turbo"):
     """
     Analyzes a given transcript using the OpenAI API to get a summary and sentiment.
     """
-    client = OpenAI(api_key=openai_api_key)
+    client = OpenAI(api_key=OPENAI_API_KEY)
 
     system_prompt = (
         "You are an expert at analyzing customer transcripts. "
@@ -970,12 +970,12 @@ def index():
     if request.method == "POST":
         transcript = request.form.get("transcript", "").strip()
 
-        if not openai_api_key:
-            api_error = "openai_api_key is not set. Please set it as an environment variable and restart the app."
+        if not OPENAI_API_KEY:
+            api_error = "OPENAI_API_KEY is not set. Please set it as an environment variable and restart the app."
         elif not transcript:
             api_error = "Transcript cannot be empty."
         else:
-            summary, sentiment = analyze_transcript(transcript, openai_api_key)
+            summary, sentiment = analyze_transcript(transcript, OPENAI_API_KEY)
             analysis_data = {
                 "Transcript": transcript,
                 "Summary": summary,
