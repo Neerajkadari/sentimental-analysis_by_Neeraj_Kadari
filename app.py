@@ -53,7 +53,7 @@ def analyze_transcript(transcript, OPENAI_API_KEY, model_name="gpt-3.5-turbo-110
 
     except Exception as e:
         print(f"An error occurred: {e}")
-        return "Analysis failed.", "Unknown"
+        return f"Error: {str(e)}", "Error"
 
 
 def save_analysis_to_csv(data, filename="call_analysis.csv"):
